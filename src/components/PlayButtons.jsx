@@ -6,10 +6,18 @@ function PlayButtons({ onPlay, onStop }) {
         role="group"
         ariel-label="Basic mixed styles example"
       >
-        <button id="play" className="btn btn-outline-primary" onClick={onPlay}>
+        <button
+          id="play"
+          className="btn btn-outline-warning btn-dj-control flex-grow-1j"
+          onClick={onPlay}
+        >
           Play
         </button>
-        <button id="stop" className="btn btn-outline-primary" onClick={onStop}>
+        <button
+          id="stop"
+          className="btn btn-outline-danger btn-dj-control flex-grow-1"
+          onClick={onStop}
+        >
           Stop
         </button>
       </div>

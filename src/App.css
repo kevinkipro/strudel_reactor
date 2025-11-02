@@ -36,3 +36,16 @@
     transform: rotate(360deg);
   }
 }
+/* dj block buttons */
+.btn-dj-control {
+  min-height: 80px;        
+  min-width: 160px;         
+  height: 100px;            
+  width: 100%;              
+  font-size: 2rem;
+  border-radius: 12px;
+  font-weight: bold;
+  display: flex;           
+  align-items: center;
+  justify-content: center;
+}
