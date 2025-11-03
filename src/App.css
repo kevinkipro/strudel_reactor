@@ -36,6 +36,7 @@
     transform: rotate(360deg);
   }
 }
+
 /* dj block buttons */
 .btn-dj-control {
   min-height: 80px;        
@@ -48,4 +49,18 @@
   display: flex;           
   align-items: center;
   justify-content: center;
+}
+
+.dj-section-border {
+  border-radius: 14px;
+  background: #1a1b20;             
+  box-shadow: 0 4px 16px rgba(203,32,40,0.07);
+}
+ 
+/* label seperattion */
+.dj-label-container {
+  background: #23242a;        
+  border: 2px solid whitesmoke;      
+  border-radius: 10px 10px 0 0;
+  padding: 0.75rem 1rem;
 }

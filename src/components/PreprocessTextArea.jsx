@@ -1,9 +1,15 @@
 function PreprocessTextArea({ defaultValue, onChange }) {
   return (
     <>
-      <label htmlFor="exampleFormControlTextarea1" className="form-label">
-        Text to preprocess:
-      </label>
+      <div className="dj-label-container mb-2 text-center">
+        <label
+          htmlFor="exampleFormControlTextarea1"
+          className="form-label text-white font-weight-bold fs-5 mb-0"
+        >
+          Text to Preprocess
+        </label>
+      </div>
+
       <textarea
         className="form-control"
         rows="15"
