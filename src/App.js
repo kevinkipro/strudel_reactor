@@ -137,10 +137,8 @@ return (
 
           <div className="col-md-4 d-flex flex-column">
             <div className="dj-section-border p-3 mb-3">
-      <div className="dj-label-container mb-3 text-white">
-        Buttons
-      </div>              <
-        div className="d-flex flex-wrap gap-3 justify-content-center">
+      <div className="dj-label-container mb-3 text-white"> Buttons </div>              
+        <div className="d-flex flex-wrap gap-3 justify-content-center">
                 <ProcButtons />
                 <PlayButtons onPlay={handlePlayEvent} onStop={handleStopEvent} />
               </div>
