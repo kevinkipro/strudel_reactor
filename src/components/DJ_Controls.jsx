@@ -16,7 +16,7 @@ function DJ_Controls() {
           aria-describedby="cpm_label"
         />
       </div>
-      <label htmlFor="volume_range" className="form-label">
+      <label htmlFor="volume_range" className="form-label text-white">
         Volume
       </label>
       <input
@@ -30,20 +30,20 @@ function DJ_Controls() {
 
       <div className="form-check">
         <input className="form-check-input" type="checkbox" value="" id="s1" />
-        <label className="form-check-label" htmlFor="s1">
+        <label className="form-check-label text-white" htmlFor="s1">
           s1
         </label>
       </div>
       <div className="form-check">
         <input className="form-check-input" type="checkbox" value="" id="d1" />
-        <label className="form-check-label" htmlFor="d1">
+        <label className="form-check-label text-white" htmlFor="d1">
           d1
         </label>
       </div>
 
       <div className="form-check">
         <input className="form-check-input" type="checkbox" value="" id="d2" />
-        <label className="form-check-label" for="d2">
+        <label className="form-check-label text-white" for="d2">
           d2
         </label>
       </div>

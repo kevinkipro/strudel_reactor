@@ -14,7 +14,6 @@ import PlayButtons from './components/PlayButtons';
 import ProcButtons from './components/ProcButtons';
 import PreprocessTextArea from './components/PreprocessTextArea';
 
-
 let globalEditor = null;
 
 const handleD3Data = (event) => {
@@ -67,6 +66,22 @@ const handleD3Data = (event) => {
 // }
 
 
+function changeCPMValue(currentCPM, setSongText, keepOriginalText){
+    const textAreaElement = document.getElementById("proc");
+    if (!textAreaElement) return;
+    
+    const currentText = keepOriginalText.current || "";
+    
+    const updatedText = currentText.replaceAll("{CPM}", currentCPM);
+    // change textarea
+    textAreaElement.value = updatedText;
+    
+    setSongText(updatedText);
+    if (globalEditor && typeof globalEditor.setCode === "function") {
+        globalEditor.setCode(updatedText);
+    }
+}
+
 export default function StrudelDemo() {
     
 const handlePlayEvent = () => {
@@ -78,7 +93,7 @@ const handleStopEvent = () => {
 }
 
 const [songText, setSongText] = useState(stranger_tune)
-
+const keepOriginalText = useRef(stranger_tune);
 const hasRun = useRef(false);
 
 useEffect(() => {
@@ -115,12 +130,27 @@ useEffect(() => {
             });
             
         document.getElementById('proc').value = stranger_tune
-        // SetupButtons()
-        // Proc()
+
+        const cpmTextInput = document.getElementById("cpm_text_input");
+        
+        let changeWhenType = null;
+
+        if (cpmTextInput && !cpmTextInput.dataset.bound){
+            cpmTextInput.addEventListener("input", () => {
+          const value = cpmTextInput.value.trim();
+
+          clearTimeout(changeWhenType);
+
+          changeWhenType = setTimeout(() => {
+            changeCPMValue(value, setSongText, keepOriginalText);
+          }, 500)
+        });
+
+        cpmTextInput.dataset.bound = "true";
+        }
     }
     globalEditor.setCode(songText);
 }, [songText]);
-
 
 return (
     <div className='App'>
@@ -149,16 +179,27 @@ return (
           {/* strudel code area */}
                 <div className="row">
                     <div className="col-md-8" style={{ maxHeight: '50vh', overflowY: 'auto' }}>
+                         <div className="dj-section-border p-3 mb-3">
+                         <div className="dj-label-container mb-3 text-white">Strudel Code</div>
                         <div id="editor" />
                         <div id="output" />
                     </div>
+                </div>
+
+             {/* DJ controls */}
+               <div className="col-md-4">
+
+             <div className="dj-section-border p-3">
+                 <div className="dj-label-container mb-3 text-white">Controls</div>
                     <div className="col-md-4">
                         <DJ_Controls/>
                     </div>
                 </div>
+             </div>
+            </div>
             </div>
             <canvas id="roll"></canvas>
-        </main >
+        </main>
     </div >
 );
 
