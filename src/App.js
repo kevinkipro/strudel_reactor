@@ -123,10 +123,10 @@ useEffect(() => {
 
 
 return (
-    <div>
+    <div className='App'>
         <main>
-                    <h2 className="text-center">Strudel Demo</h2>
-
+            {/* top left area */}
+            <h2 className=" dj-label-container text-white text-center">Strudel Demo</h2>
             <div className="container-fluid">
                 <div className="row">
                     <div className="col-md-8" style={{ maxHeight: '50vh', overflowY: 'auto' }}>
@@ -134,14 +134,21 @@ return (
                             <PreprocessTextArea defaultValue={songText} onChange={e => setSongText(e.target.value)} />
                         </div>
                     </div>
-                    <div className="col-auto">
-                        <nav>
-                            <ProcButtons/>
-                            <br />
-                            <PlayButtons onPlay={handlePlayEvent} onStop={handleStopEvent}/>
-                        </nav>
-                    </div>
-                </div>
+
+          <div className="col-md-4 d-flex flex-column">
+            <div className="dj-section-border p-3 mb-3">
+      <div className="dj-label-container mb-3 text-white">
+        Buttons
+      </div>              <
+        div className="d-flex flex-wrap gap-3 justify-content-center">
+                <ProcButtons />
+                <PlayButtons onPlay={handlePlayEvent} onStop={handleStopEvent} />
+              </div>
+            </div>
+          </div>
+          </div>
+
+          {/* strudel code area */}
                 <div className="row">
                     <div className="col-md-8" style={{ maxHeight: '50vh', overflowY: 'auto' }}>
                         <div id="editor" />
