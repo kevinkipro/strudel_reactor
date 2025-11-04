@@ -1,4 +1,18 @@
-function DJ_Controls() {
+import { changeCPMandVolumeValue } from "../App";
+
+function DJ_Controls({ setSongText, keepOriginalText }) {
+  const handleCPMChange = (e) => {
+    changeCPMandVolumeValue(e.target.value, setSongText, keepOriginalText);
+  };
+
+  const handleVolumeChange = (e) => {
+    changeCPMandVolumeValue(
+      document.getElementById("cpm_text_input")?.value || "{CPM}",
+      setSongText,
+      keepOriginalText
+    );
+  };
+
   return (
     <>
       <div className="input-group mb-3">
@@ -14,8 +28,10 @@ function DJ_Controls() {
           placeholder="CPM"
           aria-label="cpm"
           aria-describedby="cpm_label"
+          onChange={handleCPMChange}
         />
       </div>
+
       <label htmlFor="volume_range" className="form-label text-white">
         Volume
       </label>
@@ -26,6 +42,7 @@ function DJ_Controls() {
         max="1"
         step="0.01"
         id="volume_range"
+        onChange={handleVolumeChange}
       />
 
       <div className="form-check">
@@ -40,10 +57,9 @@ function DJ_Controls() {
           d1
         </label>
       </div>
-
       <div className="form-check">
         <input className="form-check-input" type="checkbox" value="" id="d2" />
-        <label className="form-check-label text-white" for="d2">
+        <label className="form-check-label text-white" htmlFor="d2">
           d2
         </label>
       </div>

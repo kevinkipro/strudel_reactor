@@ -66,13 +66,19 @@ const handleD3Data = (event) => {
 // }
 
 
-function changeCPMValue(currentCPM, setSongText, keepOriginalText){
+export function changeCPMandVolumeValue(currentCPM, setSongText, keepOriginalText){
     const textAreaElement = document.getElementById("proc");
     if (!textAreaElement) return;
     
     const currentText = keepOriginalText.current || "";
     
-    const updatedText = currentText.replaceAll("{CPM}", currentCPM);
+    const volumeInput = document.getElementById("volume_range");
+    const currentVolume = volumeInput ? volumeInput.value : "{VOLUME}";
+
+    const updatedText = currentText
+    .replaceAll("{CPM}", currentCPM)
+    .replaceAll("{VOLUME}", currentVolume);
+
     // change textarea
     textAreaElement.value = updatedText;
     
@@ -142,7 +148,7 @@ useEffect(() => {
           clearTimeout(changeWhenType);
 
           changeWhenType = setTimeout(() => {
-            changeCPMValue(value, setSongText, keepOriginalText);
+            changeCPMandVolumeValue(value, setSongText, keepOriginalText);
           }, 500)
         });
 
@@ -188,11 +194,10 @@ return (
 
              {/* DJ controls */}
                <div className="col-md-4">
-
              <div className="dj-section-border p-3">
                  <div className="dj-label-container mb-3 text-white">Controls</div>
                     <div className="col-md-4">
-                        <DJ_Controls/>
+                        <DJ_Controls setSongText={setSongText} keepOriginalText={keepOriginalText} />
                     </div>
                 </div>
              </div>
