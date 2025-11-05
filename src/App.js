@@ -13,6 +13,7 @@ import DJ_Controls from './components/DJ_Controls';
 import PlayButtons from './components/PlayButtons';
 import ProcButtons from './components/ProcButtons';
 import PreprocessTextArea from './components/PreprocessTextArea';
+import JsonSaveToLocal from './components/JsonSaveToLocal';
 
 let globalEditor = null;
 
@@ -73,11 +74,11 @@ export function changeCPMandVolumeValue(currentCPM, setSongText, keepOriginalTex
     const currentText = keepOriginalText.current || "";
     
     const volumeInput = document.getElementById("volume_range");
-    const currentVolume = volumeInput ? volumeInput.value : "{VOLUME}";
+    const currentVolume = volumeInput ? volumeInput.value : "1.0";
 
     const updatedText = currentText
     .replaceAll("{CPM}", currentCPM)
-    .replaceAll("{VOLUME}", currentVolume);
+    .replace(/\.gain\([^)]*\)/g, `.gain(${currentVolume})`);
 
     // change textarea
     textAreaElement.value = updatedText;
@@ -178,6 +179,7 @@ return (
                 <ProcButtons />
                 <PlayButtons onPlay={handlePlayEvent} onStop={handleStopEvent} />
               </div>
+                <JsonSaveToLocal songText={songText} />
             </div>
           </div>
           </div>
