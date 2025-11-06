@@ -102,21 +102,15 @@ const handleStopEvent = () => {
     globalEditor.stop()
 }
 
-// Handler for when a song is loaded from localStorage
 const handleLoadSong = (loadedText) => {
-    // Update the song text state
     setSongText(loadedText);
-    
-    // Update the keepOriginalText ref
     keepOriginalText.current = loadedText;
     
-    // Update the textarea
     const textArea = document.getElementById('proc');
     if (textArea) {
         textArea.value = loadedText;
     }
     
-    // Update the Strudel editor
     if (globalEditor && typeof globalEditor.setCode === "function") {
         globalEditor.setCode(loadedText);
     }
@@ -162,7 +156,6 @@ useEffect(() => {
         document.getElementById('proc').value = stranger_tune
 
         const cpmTextInput = document.getElementById("cpm_text_input");
-        
         let changeWhenType = null;
 
         if (cpmTextInput && !cpmTextInput.dataset.bound){
@@ -199,13 +192,19 @@ return (
             <div className="dj-section-border p-3 mb-3">
       <div className="dj-label-container mb-3 text-white"> Buttons </div>              
         <div className="d-flex flex-wrap gap-3 justify-content-center">
-                <ProcButtons />
                 <PlayButtons onPlay={handlePlayEvent} onStop={handleStopEvent} />
               </div>
-                <JsonSaveToLocal songText={songText} />
+            </div>
+
+            {/* Save/Load Section */}
+            <div className="dj-section-border p-3 mb-3 text-center">
+                <div className="dj-label-container mb-3 text-white">Save / Load</div>
+                <div className="mb-3">
+                    <JsonSaveToLocal songText={songText} />
+                </div>
                 <JsonLoadFromLocal onLoad={handleLoadSong} />
             </div>
-          </div>
+                </div>
           </div>
 
           {/* strudel code area */}
@@ -233,6 +232,5 @@ return (
         </main>
     </div >
 );
-
 
 }
