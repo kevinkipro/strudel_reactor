@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 function JsonSaveToLocal({ songText }) {
-  const [filename, setFilename] = useState("my-tune");
+  const [filename, setFilename] = useState("song");
 
   function handleSave() {
     try {

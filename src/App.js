@@ -14,12 +14,15 @@ import PlayButtons from './components/PlayButtons';
 import ProcButtons from './components/ProcButtons';
 import PreprocessTextArea from './components/PreprocessTextArea';
 import JsonSaveToLocal from './components/JsonSaveToLocal';
+import JsonLoadFromLocal from './components/JsonLoadFromLocal';
 
 let globalEditor = null;
 
 const handleD3Data = (event) => {
     console.log(event.detail);
 };
+
+
 
 // export function SetupButtons() {
 
@@ -98,6 +101,26 @@ const handlePlayEvent = () => {
 const handleStopEvent = () => {
     globalEditor.stop()
 }
+
+// Handler for when a song is loaded from localStorage
+const handleLoadSong = (loadedText) => {
+    // Update the song text state
+    setSongText(loadedText);
+    
+    // Update the keepOriginalText ref
+    keepOriginalText.current = loadedText;
+    
+    // Update the textarea
+    const textArea = document.getElementById('proc');
+    if (textArea) {
+        textArea.value = loadedText;
+    }
+    
+    // Update the Strudel editor
+    if (globalEditor && typeof globalEditor.setCode === "function") {
+        globalEditor.setCode(loadedText);
+    }
+};
 
 const [songText, setSongText] = useState(stranger_tune)
 const keepOriginalText = useRef(stranger_tune);
@@ -180,6 +203,7 @@ return (
                 <PlayButtons onPlay={handlePlayEvent} onStop={handleStopEvent} />
               </div>
                 <JsonSaveToLocal songText={songText} />
+                <JsonLoadFromLocal onLoad={handleLoadSong} />
             </div>
           </div>
           </div>
