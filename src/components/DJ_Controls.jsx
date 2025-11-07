@@ -1,4 +1,4 @@
-import { changeCPMandVolumeValue } from "../App";
+import { changeCPMandVolumeValue, changeLpf } from "../App";
 
 function DJ_Controls({ setSongText, keepOriginalText }) {
   const handleCPMChange = (e) => {
@@ -11,6 +11,10 @@ function DJ_Controls({ setSongText, keepOriginalText }) {
       setSongText,
       keepOriginalText
     );
+  };
+
+  const handleLPFChange = (e) => {
+    changeLpf(setSongText, keepOriginalText);
   };
 
   return (
@@ -44,25 +48,19 @@ function DJ_Controls({ setSongText, keepOriginalText }) {
         id="volume_range"
         onChange={handleVolumeChange}
       />
-
-      <div className="form-check">
-        <input className="form-check-input" type="checkbox" value="" id="s1" />
-        <label className="form-check-label text-white" htmlFor="s1">
-          s1
-        </label>
-      </div>
-      <div className="form-check">
-        <input className="form-check-input" type="checkbox" value="" id="d1" />
-        <label className="form-check-label text-white" htmlFor="d1">
-          d1
-        </label>
-      </div>
-      <div className="form-check">
-        <input className="form-check-input" type="checkbox" value="" id="d2" />
-        <label className="form-check-label text-white" htmlFor="d2">
-          d2
-        </label>
-      </div>
+      {/* low-pass filter dj controls */}
+      <label htmlFor="lpf_range" className="form-label text-white">
+        low-pass filter
+      </label>
+      <input
+        type="range"
+        className="form-range"
+        min="0"
+        max="10000"
+        step="100"
+        id="lpf_range"
+        onChange={handleLPFChange}
+      />
     </>
   );
 }

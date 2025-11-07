@@ -11,7 +11,6 @@ import { stranger_tune } from './tunes';
 import console_monkey_patch, { getD3Data } from './console-monkey-patch';
 import DJ_Controls from './components/DJ_Controls';
 import PlayButtons from './components/PlayButtons';
-import ProcButtons from './components/ProcButtons';
 import PreprocessTextArea from './components/PreprocessTextArea';
 import JsonSaveToLocal from './components/JsonSaveToLocal';
 import JsonLoadFromLocal from './components/JsonLoadFromLocal';
@@ -70,6 +69,7 @@ const handleD3Data = (event) => {
 // }
 
 
+
 export function changeCPMandVolumeValue(currentCPM, setSongText, keepOriginalText){
     const textAreaElement = document.getElementById("proc");
     if (!textAreaElement) return;
@@ -87,6 +87,28 @@ export function changeCPMandVolumeValue(currentCPM, setSongText, keepOriginalTex
     textAreaElement.value = updatedText;
     
     setSongText(updatedText);
+    if (globalEditor && typeof globalEditor.setCode === "function") {
+        globalEditor.setCode(updatedText);
+    }
+}
+
+export function changeLpf(setSongText, keepOriginalText){
+        const textAreaElement = document.getElementById("proc");
+    if (!textAreaElement) return;
+    
+    const currentText = keepOriginalText.current || "";
+    
+    const volumeInput = document.getElementById("lpf_range");
+    const currentVolume = volumeInput ? volumeInput.value : "5000";
+
+    const updatedText = currentText.replace(/\.lpf\([^)]*\)/g);
+
+    // update textarea
+    textAreaElement.value = updatedText;
+    
+    setSongText(updatedText);
+
+    // update studel editor
     if (globalEditor && typeof globalEditor.setCode === "function") {
         globalEditor.setCode(updatedText);
     }
