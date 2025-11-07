@@ -61,6 +61,20 @@ function DJ_Controls({ setSongText, keepOriginalText }) {
         id="lpf_range"
         onChange={handleLPFChange}
       />
+
+      {/*  high-pass q-value dj controls */}
+      <label htmlFor="hpq_range" className="form-label text-white">
+        low-pass filter
+      </label>
+      <input
+        type="range"
+        className="form-range"
+        min="0"
+        max="10000"
+        step="100"
+        id="hpq_range"
+        onChange={handleLPFChange}
+      />
     </>
   );
 }
