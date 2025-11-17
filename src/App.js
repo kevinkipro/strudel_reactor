@@ -92,8 +92,8 @@ export function changeCPMandVolumeValue(currentCPM, setSongText, keepOriginalTex
     }
 }
 
-export function changeLpf(setSongText, keepOriginalText){
-        const textAreaElement = document.getElementById("proc");
+export function changeLpf(setSongText, keepOriginalText) {
+    const textAreaElement = document.getElementById("proc");
     if (!textAreaElement) return;
     
     const currentText = keepOriginalText.current || "";
@@ -101,40 +101,25 @@ export function changeLpf(setSongText, keepOriginalText){
     const lpfInput = document.getElementById("lpf_range");
     const currentLPF = lpfInput ? lpfInput.value : "5000";
 
+    // Replace all .lpf() values
     const updatedText = currentText.replace(/\.lpf\([^)]*\)/g, `.lpf(${currentLPF})`);
 
-    // update textarea
+    // Update textarea
     textAreaElement.value = updatedText;
     
     setSongText(updatedText);
-
-    // update studel editor
+    
+    // Update Strudel editor
     if (globalEditor && typeof globalEditor.setCode === "function") {
         globalEditor.setCode(updatedText);
+        
+        //if playing - THIS IS THE FIX!
+        if (globalEditor.repl && globalEditor.repl.state.started) {
+            globalEditor.evaluate();
+        }
     }
 }
 
-export function changeLpf(setSongText, keepOriginalText){
-        const textAreaElement = document.getElementById("proc");
-    if (!textAreaElement) return;
-    
-    const currentText = keepOriginalText.current || "";
-    
-    const volumeInput = document.getElementById("lpf_range");
-    const currentVolume = volumeInput ? volumeInput.value : "5000";
-
-    const updatedText = currentText.replace(/\.lpf\([^)]*\)/g);
-
-    // update textarea
-    textAreaElement.value = updatedText;
-    
-    setSongText(updatedText);
-
-    // update studel editor
-    if (globalEditor && typeof globalEditor.setCode === "function") {
-        globalEditor.setCode(updatedText);
-    }
-}
 export default function StrudelDemo() {
     
 const handlePlayEvent = () => {
