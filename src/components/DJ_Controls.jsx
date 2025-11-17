@@ -1,4 +1,4 @@
-import { changeCPMandVolumeValue, changeLpf } from "../App";
+import { changeCPMandVolumeValue, changeLpf, changeHpf } from "../App";
 
 function DJ_Controls({ setSongText, keepOriginalText }) {
   const handleCPMChange = (e) => {
@@ -15,6 +15,10 @@ function DJ_Controls({ setSongText, keepOriginalText }) {
 
   const handleLPFChange = (e) => {
     changeLpf(setSongText, keepOriginalText);
+  };
+
+  const handleHPFChange = (e) => {
+    changeHpf(setSongText, keepOriginalText);
   };
 
   return (
@@ -62,9 +66,9 @@ function DJ_Controls({ setSongText, keepOriginalText }) {
         onChange={handleLPFChange}
       />
 
-      {/*  high-pass q-value dj controls */}
-      <label htmlFor="hpq_range" className="form-label text-white">
-        low-pass filter
+      {/*  high-pass dj controls */}
+      <label htmlFor="hpf_range" className="form-label text-white">
+        High pass filter
       </label>
       <input
         type="range"
@@ -72,8 +76,8 @@ function DJ_Controls({ setSongText, keepOriginalText }) {
         min="0"
         max="10000"
         step="100"
-        id="hpq_range"
-        onChange={handleLPFChange}
+        id="hpf_range"
+        onChange={handleHPFChange}
       />
     </>
   );

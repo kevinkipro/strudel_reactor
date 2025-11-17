@@ -119,6 +119,34 @@ export function changeLpf(setSongText, keepOriginalText){
     }
 }
 
+export function changeHpf(setSongText, keepOriginalText){
+        const textAreaElement = document.getElementById("proc");
+    if (!textAreaElement) return;
+    
+    const currentText = keepOriginalText.current || "";
+    
+    const lpfInput = document.getElementById("hpf_range");
+    const currentHPF = lpfInput ? lpfInput.value : "5000";
+
+    const updatedText = currentText.replace(/\.hpf\([^)]*\)/g, `.lpf(${currentHPF})`);
+
+    // update textarea
+    textAreaElement.value = updatedText;
+    
+    setSongText(updatedText);
+
+    // update studel editor
+    if (globalEditor && typeof globalEditor.setCode === "function") {
+        globalEditor.setCode(updatedText);
+
+        if (globalEditor.repl && globalEditor.repl.state.started){
+            globalEditor.evaluate();
+        }
+
+    }
+}
+
+
 export default function StrudelDemo() {
     
 const handlePlayEvent = () => {
