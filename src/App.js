@@ -30,9 +30,17 @@ export function changeCPMandVolumeValue(currentCPM, setSongText, keepOriginalTex
     const volumeInput = document.getElementById("volume_range");
     const currentVolume = volumeInput ? volumeInput.value : "1.0";
 
+    const lpfInput = document.getElementById("lpf_range");
+    const currentLPF = lpfInput ? lpfInput.value : "5000";
+
+    const hpfInput = document.getElementById("hpf_range");
+    const currentHPF = hpfInput ? hpfInput.value : "5000";
+
     const updatedText = currentText
-    .replaceAll("{CPM}", currentCPM)
-    .replace(/\.gain\([^)]*\)/g, `.gain(${currentVolume})`);
+        .replaceAll("{CPM}", currentCPM)
+        .replace(/\.gain\([^)]*\)/g, `.gain(${currentVolume})`)
+        .replace(/\.lpf\([^)]*\)/g, `.lpf(${currentLPF})`)
+        .replace(/\.hpf\([^)]*\)/g, `.hpf(${currentHPF})`);
 
     // change textarea
     textAreaElement.value = updatedText;
@@ -58,9 +66,19 @@ export function changeLpf(setSongText, keepOriginalText){
     // ensueres volume isnt changed when lpf is changed
     const volumeInput = document.getElementById("volume_range");
     const currentVolume = volumeInput ? volumeInput.value : "1.0";
+    const cpmInput = document.getElementById("cpm_text_input");
 
-    const updatedText = currentText.replace(/\.lpf\([^)]*\)/g, `.lpf(${currentLPF})`)
-    .replace(/\.gain\([^)]*\)/g, `.gain(${currentVolume})`);;
+
+    const hpfInput = document.getElementById("hpf_range");
+    const currentHPF = hpfInput ? hpfInput.value : "5000";
+    const currentCPM = cpmInput ? cpmInput.value.trim() : "{CPM}";
+
+
+    const updatedText = currentText
+        .replaceAll("{CPM}", currentCPM)
+        .replace(/\.gain\([^)]*\)/g, `.gain(${currentVolume})`)
+        .replace(/\.lpf\([^)]*\)/g, `.lpf(${currentLPF})`)
+        .replace(/\.hpf\([^)]*\)/g, `.hpf(${currentHPF})`);
 
     // update textarea
     textAreaElement.value = updatedText;
@@ -86,13 +104,23 @@ export function changeHpf(setSongText, keepOriginalText){
     
     const hpfInput = document.getElementById("hpf_range"); 
     const currentHPF = hpfInput ? hpfInput.value : "5000";
+    const cpmInput = document.getElementById("cpm_text_input");
+
 
     // ensueres volume isnt changed when hpf is changed
     const volumeInput = document.getElementById("volume_range");
     const currentVolume = volumeInput ? volumeInput.value : "1.0";
+    const currentCPM = cpmInput ? cpmInput.value.trim() : "{CPM}";
 
-    const updatedText = currentText.replace(/\.hpf\([^)]*\)/g, `.lpf(${currentHPF})`)
-    .replace(/\.gain\([^)]*\)/g, `.gain(${currentVolume})`);;
+    // Get current lpf
+    const lpfInput = document.getElementById("lpf_range");
+    const currentLPF = lpfInput ? lpfInput.value : "5000";
+
+    const updatedText = currentText
+        .replaceAll("{CPM}", currentCPM)
+        .replace(/\.gain\([^)]*\)/g, `.gain(${currentVolume})`)
+        .replace(/\.lpf\([^)]*\)/g, `.lpf(${currentLPF})`)
+        .replace(/\.hpf\([^)]*\)/g, `.hpf(${currentHPF})`);
 
     // update textarea
     textAreaElement.value = updatedText;
