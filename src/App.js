@@ -55,7 +55,12 @@ export function changeLpf(setSongText, keepOriginalText){
     const lpfInput = document.getElementById("lpf_range");
     const currentLPF = lpfInput ? lpfInput.value : "5000";
 
-    const updatedText = currentText.replace(/\.lpf\([^)]*\)/g, `.lpf(${currentLPF})`);
+    // ensueres volume isnt changed when lpf is changed
+    const volumeInput = document.getElementById("volume_range");
+    const currentVolume = volumeInput ? volumeInput.value : "1.0";
+
+    const updatedText = currentText.replace(/\.lpf\([^)]*\)/g, `.lpf(${currentLPF})`)
+    .replace(/\.gain\([^)]*\)/g, `.gain(${currentVolume})`);;
 
     // update textarea
     textAreaElement.value = updatedText;
@@ -79,10 +84,15 @@ export function changeHpf(setSongText, keepOriginalText){
     
     const currentText = keepOriginalText.current || "";
     
-    const lpfInput = document.getElementById("hpf_range");
-    const currentHPF = lpfInput ? lpfInput.value : "5000";
+    const hpfInput = document.getElementById("hpf_range"); 
+    const currentHPF = hpfInput ? hpfInput.value : "5000";
 
-    const updatedText = currentText.replace(/\.hpf\([^)]*\)/g, `.lpf(${currentHPF})`);
+    // ensueres volume isnt changed when hpf is changed
+    const volumeInput = document.getElementById("volume_range");
+    const currentVolume = volumeInput ? volumeInput.value : "1.0";
+
+    const updatedText = currentText.replace(/\.hpf\([^)]*\)/g, `.lpf(${currentHPF})`)
+    .replace(/\.gain\([^)]*\)/g, `.gain(${currentVolume})`);;
 
     // update textarea
     textAreaElement.value = updatedText;
