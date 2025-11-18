@@ -1,3 +1,31 @@
+# kipky008 Studel Assignment  !
+
+## Controls
+
+### Text Input 
+
+Volume: controls the volume/gain level (0.0 to 1.0).
+Low Pass Filter: controls the LPF cutoff frequency (0 to 10000 Hz).
+High Pass Filter: controls the HPF cutoff frequency (0 to 10000 Hz).
+
+### Buttons
+
+Play: will play the current Studel code
+Stop: stops running code.
+
+
+### Save/Load
+Save: Enter a filename and click save to store your current song in browser local storage.
+Load: Select a previously saved song from the dropdown and click Load to restore it.
+
+### Video !!!
+
+https://youtu.be/n_Dydly0oEA
+
+### Song
+
+used the provided song
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -68,3 +96,4 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
