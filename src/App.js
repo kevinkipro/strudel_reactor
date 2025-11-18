@@ -88,7 +88,10 @@ export function changeCPMandVolumeValue(currentCPM, setSongText, keepOriginalTex
     
     setSongText(updatedText);
     if (globalEditor && typeof globalEditor.setCode === "function") {
-        globalEditor.setCode(updatedText);
+        
+        if (globalEditor.repl && globalEditor.repl.state.started){
+            globalEditor.evaluate();
+        }
     }
 }
 
